@@ -1,4 +1,5 @@
-package com.mohitkanwar.backend.posts;
+package com.mohitkanwar.backend.posts.services;
+
 
 import org.junit.jupiter.api.Test;
 

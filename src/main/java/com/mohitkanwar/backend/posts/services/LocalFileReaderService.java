@@ -1,4 +1,4 @@
-package com.mohitkanwar.backend.posts;
+package com.mohitkanwar.backend.posts.services;
 
 import java.io.File;
 import java.nio.file.Path;
