@@ -14,9 +14,6 @@ public enum PostType {
         this.value = mimeType;
     }
 
-    public String getMimeType() {
-        return value;
-    }
     public static PostType fromString(String text) {
         for (PostType b : PostType.values()) {
             if (b.value.equalsIgnoreCase(text)) {
@@ -24,5 +21,9 @@ public enum PostType {
             }
         }
         return null;
+    }
+
+    public String getMimeType() {
+        return value;
     }
 }

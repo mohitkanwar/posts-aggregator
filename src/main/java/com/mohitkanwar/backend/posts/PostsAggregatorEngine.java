@@ -11,16 +11,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class PostsAggregatorEngine {
-    private FileReaderService fileReaderService = new LocalFileReaderService();
-    private FileNameService fileNameService = new PostFileNameService();
+    private final FileReaderService fileReaderService = new LocalFileReaderService();
+    private final FileNameService fileNameService = new PostFileNameService();
 
     public List<Post> getPostsMetaInfo(String directoryName) {
         Path directory = Path.of(directoryName);
@@ -29,21 +27,21 @@ public class PostsAggregatorEngine {
                 .filter(file -> !file.isHidden())
                 .sorted(Comparator.comparingLong(File::lastModified))
                 .map(file -> {
-            Post post = new Post();
+                    Post post = new Post();
 
-            try {
-                String type = Files.probeContentType(file.toPath());
-                post.setId(file.lastModified());
-                post.setType(PostType.fromString(type));
-                post.setDate(new Date(file.lastModified()));
-                post.setFileName(fileNameService.normalizeFileName(file.getName()));
-                System.out.print(post);
-            } catch (IOException e) {
+                    try {
+                        String type = Files.probeContentType(file.toPath());
+                        post.setId(file.lastModified());
+                        post.setType(PostType.fromString(type));
+                        post.setDate(new Date(file.lastModified()));
+                        post.setFileName(fileNameService.normalizeFileName(file.getName()));
+                        System.out.print(post);
+                    } catch (IOException e) {
 
-            }
-            //post.setType(type);
-            return post;
-        }).collect(Collectors.toList());
+                    }
+                    //post.setType(type);
+                    return post;
+                }).collect(Collectors.toList());
         return posts;
     }
 }
